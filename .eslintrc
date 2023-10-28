@@ -9,9 +9,9 @@
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
-    "standard-with-typescript",
+    "plugin:jest/recommended",
     "plugin:react/recommended",
-    "plugin:jest/recommended"
+    "standard-with-typescript"
   ],
   "overrides": [
     {
