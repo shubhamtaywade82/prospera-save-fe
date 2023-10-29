@@ -11,7 +11,8 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
-    "plugin:jest/recommended"
+    "plugin:jest/recommended",
+    "plugin:storybook/recommended"
   ],
   "overrides": [
     {
@@ -35,7 +36,12 @@
   "plugins": ["react", "react-hooks", "@typescript-eslint"],
   "rules": {
     "@typescript-eslint/no-empty-function": "off",
-    "@typescript-eslint/no-misused-promises": "warn",
+    "@typescript-eslint/no-misused-promises": "off",
+    "@typescript-eslint/no-unnecessary-type-assertion": "off",
+    "@typescript-eslint/no-confusing-void-expression": "off",
+    "@typescript-eslint/await-thenable": "off",
+    "@typescript-eslint/promise-function-async": "off",
+    "@typescript-eslint/strict-boolean-expressions": "off",
     "comma-dangle": ["error", "always-multiline"],
     "jsx-a11y/alt-text": "off",
     "max-len": [
