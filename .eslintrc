@@ -28,7 +28,6 @@
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaVersion": "latest",
-    "sourceType": "module",
     "ecmaFeatures": {
       "jsx": true
     }
@@ -42,7 +41,12 @@
     "@typescript-eslint/await-thenable": "off",
     "@typescript-eslint/promise-function-async": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
-    "comma-dangle": ["error", "always-multiline"],
+    "quotes": ["error", "double"],
+    "semi": "off",
+    "@typescript-eslint/quotes": ["error", "double"],
+    "@typescript-eslint/semi": ["error", "always"],
+    "comma-dangle": ["error", "never"],
+    "multiline-ternary": ["error", "never"],
     "jsx-a11y/alt-text": "off",
     "max-len": [
       "error",

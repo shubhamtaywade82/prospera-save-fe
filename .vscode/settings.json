@@ -5,6 +5,8 @@
     "source.fixAll": true
   },
   "files.eol": "\n",
+  "javascript.preferences.quoteStyle": "double",
+  "typescript.preferences.quoteStyle": "double",
   "search.exclude": {
     "node_modules": true,
     "out": true,
