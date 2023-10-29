@@ -4,10 +4,11 @@ import { BrowserRouter } from "react-router-dom";
 import { StrictMode } from "react";
 
 import App from "./app";
-import initI18n from './lang';
+import initI18n from "./lang";
 import reportWebVitals from "./util/web-vitals";
 import "./styles/main.scss";
 
+// eslint-disable-next-line
 const htmlRoot = document.getElementById("root") as HTMLElement;
 const reactRoot = ReactDOM.createRoot(htmlRoot);
 
