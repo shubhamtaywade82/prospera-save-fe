@@ -1,22 +1,8 @@
-// Local imports
-import HelloWorld from '../../components/HelloWorld';
+import SignUp from '../../components/SignUp';
 
-// Component definition
-function HomePage() {
+const HomePage = (): any => {
   return (
-    <HelloWorld
-      box={{
-        sx: {
-          background: 'rgb(0, 30, 60)',
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-      }}
-    />
+    <SignUp/>
   );
 }
-
-// Default export
 export default HomePage;
