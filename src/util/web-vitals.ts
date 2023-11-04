@@ -2,17 +2,17 @@
 // for quality signals that are essential to delivering a great user
 // experience on the web.
 // Learn more: https://web.dev/vitals
-import { ReportHandler } from 'web-vitals';
+import { ReportHandler } from "web-vitals";
 
 // Initializes Web Vitals with a custom reporter
-const reportWebVitals = (onPerfEntry?: ReportHandler) => {
+const reportWebVitals = (onPerfEntry?: ReportHandler): void => {
   if (onPerfEntry && onPerfEntry instanceof Function) {
-    import('web-vitals').then(({
+    import("web-vitals").then(({
       getCLS,
       getFID,
       getFCP,
       getLCP,
-      getTTFB,
+      getTTFB
     }) => {
       getCLS(onPerfEntry);
       getFID(onPerfEntry);

@@ -5,36 +5,35 @@
  */
 
 // External imports
-import LanguageDetector from 'i18next-browser-languagedetector';
-import i18n from 'i18next';
-import { initReactI18next } from 'react-i18next';
+import LanguageDetector from "i18next-browser-languagedetector";
+import { use } from "i18next";
+import { initReactI18next } from "react-i18next";
 
 // Local imports
-import resourcesEn from './resources.en.json';
-import resourcesEs from './resources.es.json';
+import resourcesEn from "./resources.en.json";
+import resourcesEs from "./resources.es.json";
 
 // Init the i18next module with the resource files
 const initI18n = () => {
-  i18n
-    .use(LanguageDetector)
+  use(LanguageDetector)
     .use(initReactI18next)
     .init({
       resources: {
         en: {
-          translations: { ...resourcesEn },
+          translations: { ...resourcesEn }
         },
         es: {
-          translations: { ...resourcesEs },
-        },
+          translations: { ...resourcesEs }
+        }
       },
-      fallbackLng: 'en',
+      fallbackLng: "en",
       debug: false,
-      ns: ['translations'],
-      defaultNS: 'translations',
+      ns: ["translations"],
+      defaultNS: "translations",
       keySeparator: false,
       interpolation: {
-        escapeValue: false,
-      },
+        escapeValue: false
+      }
     });
 };
 

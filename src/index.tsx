@@ -2,7 +2,7 @@ import React, { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 
-import App from "./app";
+import Layout from "./components/Layout/Layout";
 import reportWebVitals from "./util/web-vitals";
 import "./styles/main.scss";
 
@@ -14,12 +14,12 @@ reactRoot.render(
   process.env.REACT_APP_SCRICT_MODE === "true" ? (
     <StrictMode>
       <BrowserRouter>
-        <App />
+        <Layout />
       </BrowserRouter>
     </StrictMode>
   ) : (
     <BrowserRouter>
-      <App />
+      <Layout />
     </BrowserRouter>
   )
 );

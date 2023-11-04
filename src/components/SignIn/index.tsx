@@ -1,4 +1,4 @@
-import React, { type FormEvent } from "react";
+import React, { useState, type FormEvent } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,36 +10,69 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { AuthApi, RegisterUserParams } from "../../requests/AuthApi";
+import { AuthApi, type SessionParams } from "../../requests/AuthApi";
+import { Alert, IconButton, Snackbar } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 const defaultTheme = createTheme();
 
-const SignUp = (): JSX.Element => {
+const SignIn = (): JSX.Element => {
+  const [open, setOpen] = useState(false);
+  const [alertSeverity, setAlertSeverity] = useState<
+    "success" | "error" | undefined
+  >(undefined); // Default to success
+  const [alertMessage, setAlertMessage] = useState(
+    "You are successfully logged in"
+  );
+  const handleClose = (
+    event?: React.SyntheticEvent | Event,
+    reason?: string
+  ): void => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setOpen(false);
+  };
   const handleSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      username: data.get("username"),
-      password: data.get("password"),
-      passwordConfirmation: data.get("passwordConfirmation")
-    });
 
-    const registrationParams: RegisterUserParams = {
+    const sessionParams: SessionParams = {
       email: data.get("email") as string,
-      username: data.get("username") as string,
-      password: data.get("password") as string,
-      passwordConfirmation: data.get("passwordConfirmation") as string
+      password: data.get("password") as string
     };
 
-    AuthApi.register(registrationParams)
-      .then((res) => {
-        console.log(res);
+    // You can access email and password directly from state
+    AuthApi.login(sessionParams)
+      .then((response) => {
+        console.log(response);
+        setOpen(true);
+        window.location.href = "/home";
       })
       .catch((err) => {
         console.log(err);
+        setAlertSeverity("error");
+        setAlertMessage("Incorrect credentials entered");
+        setOpen(true);
       });
   };
+
+  const action = (
+    <React.Fragment>
+      <Button color="secondary" size="small" onClick={handleClose}>
+        UNDO
+      </Button>
+      <IconButton
+        size="small"
+        aria-label="close"
+        color="inherit"
+        onClick={handleClose}
+      >
+        <CloseIcon fontSize="small" />
+      </IconButton>
+    </React.Fragment>
+  );
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -62,7 +95,7 @@ const SignUp = (): JSX.Element => {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign up
+            Sign in
           </Typography>
           <Box
             component="form"
@@ -71,16 +104,6 @@ const SignUp = (): JSX.Element => {
             sx={{ mt: 3 }}
           >
             <Grid container spacing={2}>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  id="username"
-                  label="Username"
-                  name="username"
-                  autoComplete="username"
-                />
-              </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
@@ -99,17 +122,7 @@ const SignUp = (): JSX.Element => {
                   label="Password"
                   type="password"
                   id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="passwordConfirmation"
-                  label="Password confirmation"
-                  type="password"
-                  id="passwordConfirmation"
+                  autoComplete="current-password"
                 />
               </Grid>
             </Grid>
@@ -119,20 +132,35 @@ const SignUp = (): JSX.Element => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Sign In
             </Button>
             <Grid container justifyContent="flex-end">
-              <Grid item>
+              <Grid item={true}>
                 <Link href="#" variant="body2">
-                  Already have an account? Sign in
+                  Forgot password?
                 </Link>
               </Grid>
             </Grid>
           </Box>
         </Box>
+        <Snackbar
+          anchorOrigin={{ vertical: "top", horizontal: "center" }}
+          open={open}
+          autoHideDuration={6000}
+          onClose={handleClose}
+          action={action}
+        >
+          <Alert
+            onClose={handleClose}
+            severity={alertSeverity}
+            sx={{ width: "100%" }}
+          >
+            {alertMessage}
+          </Alert>
+        </Snackbar>
       </Container>
     </ThemeProvider>
   );
 };
 
-export default SignUp;
+export default SignIn;
